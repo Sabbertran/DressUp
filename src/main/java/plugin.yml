@@ -1,0 +1,11 @@
+name: DressUp
+main: de.sabbertran.dressup.DressUp
+version: 1.0
+website: http://www.sabbertran.de/
+author: Sabbertran
+description: Dress Plugin. Includes Static and blinking armor and hats
+commands:
+  dressup:
+    description: DressUp Command
+    usage: "/dressup"
+    

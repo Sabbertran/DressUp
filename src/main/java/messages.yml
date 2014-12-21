@@ -1,0 +1,52 @@
+menuname: DressUp Menu
+helmetstatic: &rHelmet - Static
+chestplatestatic: &rChestplate - Static
+leggingsstatic: &rLeggings - Static
+bootsstatic: &rBoots - Static
+removehelmet: &rRemove helmet
+removechestplate: &rRemove chestplate
+removeleggings: &rRemove leggings
+removeboots: &rRemove boots
+hatblocksitem: &rHat Blocks
+helmetchanging: &rHelmet Changing
+chestplatechanging: &rChestplate Changing
+leggingschanging: &rLeggings Changing
+bootschanging: &rBoots Changing
+nextpage: &aNext page
+previouspage: &cPrevious page
+backtomainmenu: &rBack to main menu
+currentpage: &rCurrent Page - %page
+helmetstaticmenu: DressUp - Helmet (Static)
+nostatichelmets: &rYou have no static helmets
+chestplatestaticmenu: DressUp - Chestplage (Static)
+nostaticchestplates: &rYou have no static chestplates
+leggingsstaticmenu: DressUp - Leggings (Static)
+nostaticleggings: &rYou have no static leggings
+bootsstaticmenu: DressUp - Boots (Static)
+nostaticboots: &rYou have no static boots
+helmetchangingmenu: DressUp - Helmet (Changing)
+nochanginghelmets: &rYou have no changing helmets
+chestplatechangingmenu: DressUp - Chestplate (Changing)
+nochangingchestplates: &rYou have no changing chestplates
+leggingschangingmenu: DressUp - Leggings (Changing)
+nochangingleggings: &rYou have no changing leggings
+bootschangingmenu: DressUp - Boots (Changing)
+nochangingboots: &rYou have no changing boots
+hatblocksinventory: Hat Blocks
+nohatblocks: &rYou have no hat blocks
+errorstatichelmet: Error loading static helmet (%id) for player %player
+errorstaticchestplate: Error loading static chestplate (%id) for player %player
+errorstaticleggings: Error loading static leggings (%id) for player %player
+errorstaticboots: Error loading static boots (%id) for player %player
+errorchanginghelmet: Error loading changing helmet (%id) for player %player
+errorchangingchestplate: Error loading changing chestplate (%id) for player %player
+errorchangingleggings: Error loading changing leggings (%id) for player %player
+errorchangingboots: Error loading changing boots (%id) for player %player
+statichelmetexample: Static Helmet Example #%id
+staticchestplateexample: Static Chestplate Example #%id
+staticleggingsexample: Static Leggings Example #%id
+staticbootsexample: Static Boots Example #%id
+changinghelmetexample: Changing Helmet Example #%id
+changingchestplateexample: Changing Chestplate Example #%id
+changingbootsexample: Changing Boots Example #%id
+changingleggingsexample: Changing Leggings Example #%id
