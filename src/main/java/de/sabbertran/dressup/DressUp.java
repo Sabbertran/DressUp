@@ -24,15 +24,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class DressUp extends JavaPlugin
 {
 
     private Logger log = getLogger();
-
-    private String servername;
-    private String serverkey;
 
     private ArrayList<String> sql;
     private Connection sql_connection;
@@ -55,8 +53,6 @@ public class DressUp extends JavaPlugin
     @Override
     public void onEnable()
     {
-        getConfig().addDefault("DressUp.ServerName", "Enter your servername here");
-        getConfig().addDefault("DressUp.ServerKey", "Enter your serverkey here");
         getConfig().addDefault("DressUp.SQL", new String[]
         {
             "Adress", "Port", "Database", "User", "Password"
@@ -65,9 +61,6 @@ public class DressUp extends JavaPlugin
         getConfig().options().copyDefaults(true);
         saveConfig();
 
-        servername = getConfig().getString("DressUp.ServerName");
-        serverkey = getConfig().getString("DressUp.ServerKey");
-
         sql = (ArrayList<String>) getConfig().getStringList("DressUp.SQL");
 
         testMode = getConfig().getBoolean("DressUp.TestMode");
@@ -75,13 +68,6 @@ public class DressUp extends JavaPlugin
         if (testMode)
         {
             log.info("DressUp is running in test mode!");
-        }
-
-        if (!serverValid())
-        {
-            testMode = true;
-            log.info("This server is not registered. Unless you register the server you can only use the test mode of this plugin");
-            log.info("Please register the server by joining 'plugin.sabbertran.de' with your minecraft account");
         }
 
         loggedOutHelmet = new HashMap<String, String>();
@@ -173,9 +159,9 @@ public class DressUp extends JavaPlugin
                     for (int i = 1; i < split.length; i++)
                     {
                         message = message + split[i] + ": ";
-                        message = message.substring(0, message.length() - 2);
-                        messages.put(split[0], message);
                     }
+                    message = message.substring(0, message.length() - 2);
+                    messages.put(split[0], message);
                 }
             }
             read_messages.close();
@@ -208,19 +194,21 @@ public class DressUp extends JavaPlugin
 
         if (getServer().getOnlinePlayers().length > 0)
         {
-            for (final Player p : getServer().getOnlinePlayers())
+            for (Player p : getServer().getOnlinePlayers())
             {
                 wardrobe.updateWardrobe(p);
-                getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable()
+            }
+            getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable()
+            {
+                @Override
+                public void run()
                 {
-                    @Override
-                    public void run()
+                    for (Player p : getServer().getOnlinePlayers())
                     {
                         wardrobe.loadPlayerArmor(p);
-                        System.out.println("loaded " + p.getName());
                     }
-                }, 100L);
-            }
+                }
+            }, 20L);
         }
 
         log.info("DressUp enabled");
@@ -309,27 +297,12 @@ public class DressUp extends JavaPlugin
         return sql_connection;
     }
 
-    private boolean serverValid()
+    private void logStart()
     {
         try
         {
-            InetAddress address = InetAddress.getLocalHost();
-            String ip = address.getHostAddress();
-            int port = getServer().getPort();
-
-            URL url = new URL("http://sabbertran.de/plugins/dressup/auth.php?name=" + servername + "&ip=" + ip + "&port=" + port + "&key=" + serverkey);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null)
-            {
-                if (inputLine.contains("true"))
-                {
-                    in.close();
-                    return true;
-                }
-            }
-            in.close();
+            URL url = new URL("http://sabbertran.de/plugins/dressup/log.php?name=" + getServer().getName() + "&ip=" + getServer().getIp() + "&port=" + getServer().getPort());
+            url.openStream();
         } catch (UnknownHostException ex)
         {
             Logger.getLogger(DressUp.class.getName()).log(Level.SEVERE, null, ex);
@@ -337,7 +310,21 @@ public class DressUp extends JavaPlugin
         {
             Logger.getLogger(DressUp.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    public boolean contains(ArrayList<HashMap<ItemStack[], String>> list, String name)
+    {
+        name = ChatColor.stripColor(name);
+        for (HashMap<ItemStack[], String> entry : list)
+        {
+            for (Map.Entry<ItemStack[], String> entry2 : entry.entrySet())
+            {
+                if (entry2.getValue().contains(name))
+                {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 

@@ -753,6 +753,19 @@ public class Wardrobe
             main.getServer().getScheduler().cancelTask(armorTasks.get(p)[slot]);
             armorTasks.get(p)[slot] = -1;
         }
+        if (slot == 0)
+        {
+            main.getLoggedOutHelmet().remove(p.getUniqueId().toString().replace("-", ""));
+        } else if (slot == 1)
+        {
+            main.getLoggedOutChestplate().remove(p.getUniqueId().toString().replace("-", ""));
+        } else if (slot == 2)
+        {
+            main.getLoggedOutLeggings().remove(p.getUniqueId().toString().replace("-", ""));
+        } else if (slot == 4)
+        {
+            main.getLoggedOutBoots().remove(p.getUniqueId().toString().replace("-", ""));
+        }
     }
 
     public void savePlayerArmor(Player p)

@@ -465,6 +465,33 @@ public class Events implements Listener
                 }
             }
             ev.setCancelled(true);
+        } else if (ev.getCurrentItem() != null)
+        {
+            if (ev.getRawSlot() == 5 && ev.getCurrentItem().getType() == Material.LEATHER_HELMET)
+            {
+                if (ev.getCurrentItem().hasItemMeta() && ev.getCurrentItem().getItemMeta().getDisplayName() != null && main.contains(main.getWardrobe().getHelmetChanging().get(p.getUniqueId().toString().replace("-", "")), ev.getCurrentItem().getItemMeta().getDisplayName()))
+                {
+                    ev.setCancelled(true);
+                }
+            } else if (ev.getRawSlot() == 6 && ev.getCurrentItem().getType() == Material.LEATHER_CHESTPLATE)
+            {
+                if (ev.getCurrentItem().hasItemMeta() && ev.getCurrentItem().getItemMeta().getDisplayName() != null && main.contains(main.getWardrobe().getChestplateChanging().get(p.getUniqueId().toString().replace("-", "")), ev.getCurrentItem().getItemMeta().getDisplayName()))
+                {
+                    ev.setCancelled(true);
+                }
+            } else if (ev.getRawSlot() == 7 && ev.getCurrentItem().getType() == Material.LEATHER_LEGGINGS)
+            {
+                if (ev.getCurrentItem().hasItemMeta() && ev.getCurrentItem().getItemMeta().getDisplayName() != null && main.contains(main.getWardrobe().getLeggingsChanging().get(p.getUniqueId().toString().replace("-", "")), ev.getCurrentItem().getItemMeta().getDisplayName()))
+                {
+                    ev.setCancelled(true);
+                }
+            } else if (ev.getRawSlot() == 8 && ev.getCurrentItem().getType() == Material.LEATHER_BOOTS)
+            {
+                if (ev.getCurrentItem().hasItemMeta() && ev.getCurrentItem().getItemMeta().getDisplayName() != null && main.contains(main.getWardrobe().getBootsChanging().get(p.getUniqueId().toString().replace("-", "")), ev.getCurrentItem().getItemMeta().getDisplayName()))
+                {
+                    ev.setCancelled(true);
+                }
+            }
         }
     }
 }
